@@ -1,5 +1,46 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
+/* reset layout */
+html {
+ font-size: 10px;
+}
 body {
-  background-color: #fff;
+    font-size: 1.6rem;
+    box-sizing: border-box;
+}
+/* link-style */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+/* custom class */
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+}
+.reset-mp {
+    margin: 0;
+    padding: 0;
+}
+.reset-box {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+.reset-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+.reset-button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
 }
 head {
   font-size: large;

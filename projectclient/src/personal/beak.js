@@ -1,10 +1,41 @@
-// src/js/lib.js
-// ES6 모듈
-export const pi = Math.PI;
+const mainUl = document.querySelector(".main-wirte-pick-lists");
+const mainSlidePrevBtn = document.querySelector(".main-slide-priv");
+const mainSlideNextBtn = document.querySelector(".main-slide-next");
+const mainSlideNumber = document.querySelector(".main-silde-numbering");
 
-export function power(x, y) {
-  // ES7: 지수 연산자
-  return x ** y;
+const checkNowSlidePage = pageNum => {
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    li.classList.toggle("main-nowPage",idx === pageNum);
+  })
 }
 
-// ES6 클래스
+const mainSlideBtnFunction = (function(){
+  let slideNum = 0;
+  const clickMainSlideNext = clickBtnNum => {
+    ++slideNum;
+    if(typeof clickBtnNum === Number){ 
+      slideNum = clickBtnNum
+    }
+    mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
+    mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
+    mainUl.style.transform = `translateX(-${slideNum*960}px)`;
+    checkNowSlidePage(slideNum);
+  };
+  const clickMainSlidePrev = clickBtnNum => {
+    --slideNum;
+    if(typeof clickBtnNum === Number){ 
+      slideNum = clickBtnNum
+    }
+    mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
+    mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
+    mainUl.style.transform = `translateX(-${slideNum*960}px)`;
+    checkNowSlidePage(slideNum);
+  }
+  return {
+    clickMainSlideNext,
+    clickMainSlidePrev
+  }
+})();
+
+mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
+mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;

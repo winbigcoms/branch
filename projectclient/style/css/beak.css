@@ -1,3 +1,215 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css");
+/* reset layout */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap');
+html {
+ font-size: 10px;
+}
 body {
-  background-color: #fff;
+    font-size: 1.6rem;
+    box-sizing: border-box;
+}
+/* link-style */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover, a:active {
+  text-decoration: none;
+};
+button:focus {
+  outline:0;
+}
+/* custom class */
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+}
+.reset-mp {
+    margin: 0;
+    padding: 0;
+}
+.reset-box {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+}
+ul, li {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+.no-show {
+  visibility: hidden;
+}
+.reset-button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+/* 
+  메인 시작부
+*/
+main{
+  font-family: "Nanum Myeongjo",sans-serif
+}
+.main h3,.main h4,.main p {
+  margin: 0;
+}
+.main-introBranch {
+  width: 960px;
+  margin: 10px auto 20px;
+  line-height: 1.5;
+}
+.main-introBranch > h3{
+  font-size: 40px;
+}
+.main-introBranch > p{
+  font-size: 32px;
+  color: #cacaca;
+}
+.main-brunch-logo-icon{
+  display: inline-block ;
+  background-image:url("../images/logo/ico_brunch_v8_181004_v2.png");
+  background-position: -120px -200px;
+  width: 28px;
+  height: 28px;;
+  margin: 0px 10px 10px 5px;
+}
+.main-notice {
+  text-align: right;
+  color: #00c3bd;
+  font-style: italic;
+  font-size: 11px;
+}
+.main-notice h4,.main-notice p {
+  display: inline-block;
+}
+.main-notice p{
+  color: #888;
+}
+/* 
+  메인 슬라이드
+*/
+.main-recommend-write {
+  overflow: hidden;
+  position: relative;
+}
+.main-write-pick-list-box{
+  margin: 0 auto;
+  overflow: visible;
+  width: 960px;
+}
+.main-wirte-pick-lists {
+  width: 900%;
+  margin: 0 auto;
+  height: 520px;
+  display: flex;
+  transform: translatex(0px);
+  transition: all 0.3s;
+}
+.main-wirte-pick-lists > li{
+  width: 960px;
+  display: inline-block;
+}
+.main-slide{
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main-slide a{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.main-slide h4, .main-slide p {
+  margin: 20px auto;
+  color: #ddd;
+}
+.main-slide h4 {
+  font-size: 28px;
+  font-weight: 400;
+}
+.slide1-1 {
+  width: 480px;
+  height: 520px;
+  background-color: green;
+}
+.slide1-2,.slide1-3 {
+  width: 480px;
+  height: 260px;
+  background-color: skyblue;
+}
+.slide2-1, .slide2-3, .slide2-2  {
+  width: 320px;
+  height: 520px;
+  background-color: green;
+}
+.slide2-2 {
+  background-color: red;
+}
+.slide2-3 {
+  background-color: hotpink;
+}
+.slide3-1,.slide3-2,.slide3-3,.slide3-4 {
+  width: 480px;
+  height: 260px;
+  background-color: orange;
+}
+.slide3-2 {
+  background-color: orchid;
+}
+.slide3-3 {
+  background-color: purple;
+}
+.slide3-4 {
+  background-color: skyblue;
+}
+.main-btn-box{
+  display: flex;
+  justify-content: space-around;
+}
+.main-slide-btn{
+  width: 100px;
+  height:100px;
+  outline: none;
+  background-image: url("../images/logo/ico_brunch_v8_181004_v2.png");
+}
+.main-slide-priv{
+  position: absolute;
+  top: 210px;
+  background-position: -167px -175px;
+  left: 30px;
+}
+.main-slide-next{
+  position: absolute;
+  top: 210px; 
+  background-position: -269px -175px;
+  right: 30px;
+}
+.main-silde-numbering{
+  width: 960px;
+  margin: 30px auto 0 ;
+  display: flex;
+  justify-content: center;
+}
+.main-silde-numbering > li{
+  padding: 0 11px;
+  font-size: 12px;
+  opacity: 0.3;
+  transition: all 0.4s; 
+}
+.main-nowPage{
+  opacity: 1 !important;
+  text-decoration-line: underline;
+  font-weight: bold;
+  line-height: 1px;
 }
