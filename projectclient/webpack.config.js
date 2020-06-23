@@ -12,21 +12,42 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: [
-          path.resolve(__dirname, 'src/js')
-        ],
+        include: path.resolve(__dirname, 'src/js'),
         exclude: /node_modules/,
-        use: {
+        use: [{
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env'],
             plugins: ['@babel/plugin-proposal-class-properties']
           }
-        }
+        }]
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader,'css-loader']
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader:'css-loader',
+            options: {
+              url: true,
+              import:true
+            }
+          },
+          "postcss-loader",
+          {
+            loader: 'resolve-url-loader',
+            options: {
+              attempts: 1
+            }
+          }
+        ]
+      },
+      {
+        test:/\.(png|jpe)$/,
+        loader: 'file-loader',
+        options: {
+          publicPath: './dist/'
+        }
       }
     ]
   },

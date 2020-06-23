@@ -11,25 +11,22 @@ const checkNowSlidePage = pageNum => {
 
 const mainSlideBtnFunction = (function(){
   let slideNum = 0;
-  const clickMainSlideNext = clickBtnNum => {
-    ++slideNum;
-    if(typeof clickBtnNum === Number){ 
+  const countSlide = (clickBtnNum)=> {
+    if(typeof clickBtnNum === "number"){
       slideNum = clickBtnNum
     }
     mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
     mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
     mainUl.style.transform = `translateX(-${slideNum*960}px)`;
     checkNowSlidePage(slideNum);
+  }
+  const clickMainSlideNext = clickBtnNum => {
+    ++slideNum;
+    countSlide(clickBtnNum)
   };
   const clickMainSlidePrev = clickBtnNum => {
     --slideNum;
-    if(typeof clickBtnNum === Number){ 
-      slideNum = clickBtnNum
-    }
-    mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
-    mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
-    mainUl.style.transform = `translateX(-${slideNum*960}px)`;
-    checkNowSlidePage(slideNum);
+    countSlide(clickBtnNum)
   }
   return {
     clickMainSlideNext,
@@ -39,3 +36,65 @@ const mainSlideBtnFunction = (function(){
 
 mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
 mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;
+
+mainSlideNumber.onclick = e =>{
+  if( !e.target.matches(".main-silde-numbering > li > a") ) return;
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    if(li === e.target.parentNode){
+      mainSlideBtnFunction.clickMainSlidePrev(idx);
+    }
+  })
+};
+const makeMainSlide = async() => {
+  let {data} = await axios.get("http://localhost:9000/post");
+  console.log(data[0]);
+  let html ="";
+  let count = 1;
+  let count2 = 1;
+  data[0].forEach(data => {
+    // 10번의 사이클을 3번 돈다.
+    if(count===1 || count===4 || count=== 7){
+      html += `<li class="main-slide${count2}">
+                  <div class="main-slide slide${count2}-1">
+                    <a href="javascript:void(0)">
+                      <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                      <div class="main-slide-info">
+                        <h4>${data.title}</h4>
+                        <p>${data.content}</p>
+                        <p>by ${data.name}</p>
+                      </div>
+                    </a>
+                  </div>`;
+      ++count;
+      return;
+    }else if(count === 3 ||count === 6 ||count === 10 ) {
+      html += `<div class="main-slide slide${count2}-3">
+                <a href="javascript:void(0)">
+                  <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                  <div class="main-slide-info">
+                    <h4>${data.title}</h4>
+                    <p>${data.content}</p>
+                    <p>by ${data.name}</p>
+                  </div>
+                </a>
+              </div>
+              </li>`;  
+      count === 10 ? count = 1: ++count ;
+      count2 < 3? ++count2 : count2 = 1;
+      return;
+    }
+    html += `<div class="main-slide slide${count2}-2">
+              <a href="javascript:void(0)">
+                <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                <div class="main-slide-info">
+                  <h4>${data.title}</h4>
+                  <p>${data.content}</p>
+                  <p>by ${data.name}</p>
+                </div>
+              </a>
+            </div>`;
+    ++count;
+  })
+  mainUl.innerHTML = html;
+}
+window.onload = makeMainSlide;
