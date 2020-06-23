@@ -10260,6 +10260,7 @@ try {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _personal_beak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../personal/beak */ "./src/personal/beak.js");
+/* harmony import */ var _personal_beak__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_personal_beak__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _personal_mi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../personal/mi */ "./src/personal/mi.js");
 /* harmony import */ var _personal_mi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_personal_mi__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _personal_yong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../personal/yong */ "./src/personal/yong.js");
@@ -10291,24 +10292,109 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/personal/beak.js ***!
   \******************************/
-/*! exports provided: pi, power */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pi", function() { return pi; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "power", function() { return power; });
-// src/js/lib.js
-// ES6 모듈
-const pi = Math.PI;
+const mainUl = document.querySelector(".main-wirte-pick-lists");
+const mainSlidePrevBtn = document.querySelector(".main-slide-priv");
+const mainSlideNextBtn = document.querySelector(".main-slide-next");
+const mainSlideNumber = document.querySelector(".main-silde-numbering");
 
-function power(x, y) {
-  // ES7: 지수 연산자
-  return x ** y;
+const checkNowSlidePage = pageNum => {
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    li.classList.toggle("main-nowPage",idx === pageNum);
+  })
 }
 
-// ES6 클래스
+const mainSlideBtnFunction = (function(){
+  let slideNum = 0;
+  const countSlide = (clickBtnNum)=> {
+    if(typeof clickBtnNum === "number"){
+      slideNum = clickBtnNum
+    }
+    mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
+    mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
+    mainUl.style.transform = `translateX(-${slideNum*960}px)`;
+    checkNowSlidePage(slideNum);
+  }
+  const clickMainSlideNext = clickBtnNum => {
+    ++slideNum;
+    countSlide(clickBtnNum)
+  };
+  const clickMainSlidePrev = clickBtnNum => {
+    --slideNum;
+    countSlide(clickBtnNum)
+  }
+  return {
+    clickMainSlideNext,
+    clickMainSlidePrev
+  }
+})();
 
+mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
+mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;
+
+mainSlideNumber.onclick = e =>{
+  if( !e.target.matches(".main-silde-numbering > li > a") ) return;
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    if(li === e.target.parentNode){
+      mainSlideBtnFunction.clickMainSlidePrev(idx);
+    }
+  })
+};
+const makeMainSlide = async() => {
+  let {data} = await axios.get("http://localhost:9000/post");
+  console.log(data[0]);
+  let html ="";
+  let count = 1;
+  let count2 = 1;
+  data[0].forEach(data => {
+    // 10번의 사이클을 3번 돈다.
+    if(count===1 || count===4 || count=== 7){
+      html += `<li class="main-slide${count2}">
+                  <div class="main-slide slide${count2}-1">
+                    <a href="javascript:void(0)">
+                      <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                      <div class="main-slide-info">
+                        <h4>${data.title}</h4>
+                        <p>${data.content}</p>
+                        <p>by ${data.name}</p>
+                      </div>
+                    </a>
+                  </div>`;
+      ++count;
+      return;
+    }else if(count === 3 ||count === 6 ||count === 10 ) {
+      html += `<div class="main-slide slide${count2}-3">
+                <a href="javascript:void(0)">
+                  <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                  <div class="main-slide-info">
+                    <h4>${data.title}</h4>
+                    <p>${data.content}</p>
+                    <p>by ${data.name}</p>
+                  </div>
+                </a>
+              </div>
+              </li>`;  
+      count === 10 ? count = 1: ++count ;
+      count2 < 3? ++count2 : count2 = 1;
+      return;
+    }
+    html += `<div class="main-slide slide${count2}-2">
+              <a href="javascript:void(0)">
+                <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                <div class="main-slide-info">
+                  <h4>${data.title}</h4>
+                  <p>${data.content}</p>
+                  <p>by ${data.name}</p>
+                </div>
+              </a>
+            </div>`;
+    ++count;
+  })
+  mainUl.innerHTML = html;
+}
+window.onload = makeMainSlide;
 
 /***/ }),
 
