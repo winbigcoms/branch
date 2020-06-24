@@ -88,7 +88,7 @@ const makeMainSlide = async() => {
               </div>
               </li>`;  
       count === 10 ? count = 1: ++count ;
-      count2 < 3? ++count2 : count2 = 1;
+      count2 < 3 ? ++count2 : count2 = 1;
       return;
     }
     html += `<div class="main-slide slide${count2}-2">
@@ -116,3 +116,31 @@ setInterval(() => {
     },7000)
   })
 }, intervalTime);
+
+// kakaologin
+// const checkLogin = document.getElementById("token-result");
+// const kakaoImg = document.querySelector(".kakaoImg");
+
+// let loginInfo ={}
+// Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
+// function loginFormWithKakao() {
+//   Kakao.Auth.loginForm({
+//     success: function(authObj) {
+//       Kakao.API.request({
+//         url:'/v2/user/me',
+//         success: res => {
+//           loginInfo = JSON.parse(JSON.stringify(res))
+//           console.log(loginInfo);
+//           checkLogin.innerHTML= loginInfo.properties.nickname;
+//           kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+//         }
+//         ,fail: err => {
+//           console.log(JSON.stringify(err))
+//         }
+//       })
+//     },
+//     fail: function(err) {
+//       alert(JSON.stringify(err))
+//     },
+//   })
+// }

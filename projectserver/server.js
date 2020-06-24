@@ -64,5 +64,5 @@ app.get("/post",async (req,res)=> {
     console.error(e);
   }
 })
-
+// https://kauth.kakao.com/oauth/authorize?client_id=199989650f60e6516ea834de4e2da3f4&redirect_url=http://localhost:5500
 app.listen(9000, () => console.log(`server start on port 9000`))
