@@ -2,6 +2,14 @@ const mainUl = document.querySelector(".main-wirte-pick-lists");
 const mainSlidePrevBtn = document.querySelector(".main-slide-priv");
 const mainSlideNextBtn = document.querySelector(".main-slide-next");
 const mainSlideNumber = document.querySelector(".main-silde-numbering");
+const mainNotice = document.querySelector('.main-notice');
+
+let notice = [
+  {type:"Notice",content:"삼성 갤럭시 S20에 작가님의 브런치북이 소개됩니다!"},
+  {type:"Update",content:"[오픈] 당신이 읽던 작품, '글 읽는 서재'에 모아두었어요"},
+  {type:"Notice",content:"(6/3) 서비스 이용약관 및 개인정보 처리방침 변경 안내"},
+  {type:"Update",content:"메이플 스토리 신규 5차 스킬이 추가됩니다!"},
+]
 
 const checkNowSlidePage = pageNum => {
   [...mainSlideNumber.children].forEach( (li, idx) => {
@@ -98,3 +106,13 @@ const makeMainSlide = async() => {
   mainUl.innerHTML = html;
 }
 window.onload = makeMainSlide;
+
+let intervalTime = (notice.length+1)*7000
+setInterval(() => {
+  notice.forEach( item => {
+    setTimeout(()=> {
+      mainNotice.innerHTML = `<h4>${item.type}</h4>
+      <p>${item.content}</p>`
+    },7000)
+  })
+}, intervalTime);

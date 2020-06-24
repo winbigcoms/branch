@@ -235,6 +235,7 @@ main{
   margin: 30px auto 0 ;
   display: flex;
   justify-content: center;
+  color: #333
 }
 .main-silde-numbering > li{
   padding: 0 11px;
