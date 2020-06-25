@@ -10385,7 +10385,7 @@ const makeMainSlide = async() => {
               </div>
               </li>`;  
       count === 10 ? count = 1: ++count ;
-      count2 < 3? ++count2 : count2 = 1;
+      count2 < 3 ? ++count2 : count2 = 1;
       return;
     }
     html += `<div class="main-slide slide${count2}-2">
@@ -10401,8 +10401,21 @@ const makeMainSlide = async() => {
     ++count;
   })
   mainUl.innerHTML = html;
+  if(Kakao.Auth.getAccessToken()){
+    Kakao.API.request({
+    url:'/v2/user/me',
+    success: res => {
+      loginInfo = JSON.parse(JSON.stringify(res))
+      console.log(loginInfo);
+      checkLogin.innerHTML= loginInfo.properties.nickname;
+      kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+    }
+    ,fail: err => {
+      console.log(JSON.stringify(err))
+    }
+  })}
 }
-window.onload = makeMainSlide;
+window.addEventListener("load",makeMainSlide);
 
 let intervalTime = (notice.length+1)*7000
 setInterval(() => {
@@ -10413,6 +10426,7 @@ setInterval(() => {
     },7000)
   })
 }, intervalTime);
+
 
 /***/ }),
 
@@ -10550,7 +10564,58 @@ window.addEventListener('load',function() {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// 서브(캐러셀) 슬라이드 
+const $carouselWindow = document.querySelector('.window-article');
+const $carouselUl = document.querySelector('.list-article');
+const $slides = document.querySelectorAll('.list-article li')
 
+// 서브 슬라이드 버튼
+const $prevBtn = document.querySelector('.prev-btn');
+const $nextBtn = document.querySelector('.next-btn');
+
+
+const getArticles = async () => {
+  let {data} = await axios.get("http://localhost:9000/post");
+  console.log(data[0]);
+  let html = '';
+  data[0].forEach(({ content, name, source, title }) => {
+    html += `<li class="reset-list">
+      <a href="#" target="_blank">
+      <img src="/projectclient/style/images/subslide/${source}" alt="#">
+      <strong class="tit-subject">${title}</strong>
+      <p class="desc-article">${content}</p>
+      <span class="info-by">
+      <span class="icon-by">by</span>
+      &nbsp;${name}</span>
+      </a></li>`
+  });
+  $carouselUl.innerHTML = html;
+};
+window.onload = getArticles;
+
+
+let num = 0
+$nextBtn.onclick = () => {
+  num++;
+  if(num === 1) {
+    $prevBtn.classList.toggle("hidden");
+  }
+  $carouselUl.style.transform = `translateX(-${num*960}px)`;
+  if (num === 7) {
+    $nextBtn.classList.toggle("hidden")
+  }
+};
+
+$prevBtn.onclick = () => {
+  num--;
+  if (num === 6) {
+    $nextBtn.classList.toggle("hidden")
+  }
+  $carouselUl.style.transform = `translateX(-${num*960}px)`;
+  if (num === 0) {
+    $prevBtn.classList.toggle("hidden")
+  }
+}
 
 /***/ }),
 
@@ -10561,7 +10626,29 @@ window.addEventListener('load',function() {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+const openSidebar = document.querySelector(".btn-menu.img-ico");
+const banner = document.querySelector('.banner')
+const link1 = document.querySelector('.link-page.link-page1');
+const link2 = document.querySelector('.link-page.link-page2');
 
+
+openSidebar.onclick = togglesidebar = () => {
+    document.getElementById('sidemenu').classList.toggle('open');
+};
+
+const btnClose = () => {
+    banner.style.marginTop = "-420px"
+};
+
+link1.onclick = () => {
+    document.getElementsByClassName('item1')[0].setAttribute('style', 'z-index: 2');
+    document.getElementsByClassName('item2')[0].setAttribute('style', 'z-index: 1');
+}
+
+link2.onclick = () => {
+    document.getElementsByClassName('item1')[0].setAttribute('style', 'z-index: 1');
+    document.getElementsByClassName('item2')[0].setAttribute('style', 'z-index: 2');
+}
 
 /***/ }),
 
@@ -10624,3 +10711,46 @@ module.exports = __webpack_require__(/*! ./src/js/main.js */"./src/js/main.js");
 
 /******/ });
 //# sourceMappingURL=bundle.js.map
+
+// kakaologin
+
+
+// checkLogOut.onclick = ()=> {
+//   if(!Kakao.Auth.getAccessToken()) {
+//     console("로그인 안대어 있어요");
+//     return;
+//   }
+//   Kakao.Auth.logout(function() {
+//     alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+//   })
+// };
+
+
+let loginInfo ={}
+Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
+function loginFormWithKakao() {
+  if(Kakao.Auth.getAccessToken()) {
+    console.log("이미 로그인댐");
+    console.log(Kakao.Auth.getAccessToken());
+    return;
+  }
+  Kakao.Auth.loginForm({
+    success: function(authObj) {
+      Kakao.API.request({
+        url:'/v2/user/me',
+        success: res => {
+          loginInfo = JSON.parse(JSON.stringify(res))
+          console.log(loginInfo);
+          checkLogin.innerHTML= loginInfo.properties.nickname;
+          kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+        }
+        ,fail: err => {
+          console.log(JSON.stringify(err))
+        }
+      })
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err))
+    },
+  })
+}
