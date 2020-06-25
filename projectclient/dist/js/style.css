@@ -1126,7 +1126,11 @@ button {
   margin: 40px auto 9px;
   background-position: -1px -26px;
 }
-
+.kakao-profile-Img {
+  width: 90px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
 #sidemenu .side-profile.logout .slogan {
   font-family: Georgia;
   font-size: 13px;
