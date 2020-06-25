@@ -1,6 +1,5 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
 @import url(https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap);
-
 /* reset layout */
 html {
  font-size: 10px;
@@ -251,8 +250,6 @@ main{
   font-weight: 900;
   font-size: 20px;
 }
-
-/* brunch text img */
 .brunch-title {
   background: url(./9743a9e33cc96c9074bb0a5b2fcebe41.png) no-repeat;
   background-size: 380px 600px;
@@ -727,6 +724,18 @@ main{
   left: 0;
 }
 
+.side-service-menu > ul {
+  margin: 0;
+  padding: 0;
+}
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  border-radius: 0px;
+}
+
 .screen-out {
   overflow: hidden;
   position: absolute;
@@ -739,7 +748,10 @@ main{
 .f-l {
   float: left;
 }
-
+.f-l > .f-l {
+  margin: 0;
+  padding: 0;
+}
 .f-r {
   float: right;
 }
@@ -786,6 +798,8 @@ main{
   width: 100%;
   height: 480px;
   overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 .banner .item-banner {

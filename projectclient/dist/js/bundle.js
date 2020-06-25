@@ -10401,19 +10401,6 @@ const makeMainSlide = async() => {
     ++count;
   })
   mainUl.innerHTML = html;
-  if(Kakao.Auth.getAccessToken()){
-    Kakao.API.request({
-    url:'/v2/user/me',
-    success: res => {
-      loginInfo = JSON.parse(JSON.stringify(res))
-      console.log(loginInfo);
-      checkLogin.innerHTML= loginInfo.properties.nickname;
-      kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
-    }
-    ,fail: err => {
-      console.log(JSON.stringify(err))
-    }
-  })}
 }
 window.addEventListener("load",makeMainSlide);
 
@@ -10426,6 +10413,7 @@ setInterval(() => {
     },7000)
   })
 }, intervalTime);
+
 
 
 /***/ }),
@@ -10627,7 +10615,6 @@ $prevBtn.onclick = () => {
 /***/ (function(module, exports) {
 
 const openSidebar = document.querySelector(".btn-menu.img-ico");
-const banner = document.querySelector('.banner')
 const link1 = document.querySelector('.link-page.link-page1');
 const link2 = document.querySelector('.link-page.link-page2');
 
@@ -10636,9 +10623,7 @@ openSidebar.onclick = togglesidebar = () => {
     document.getElementById('sidemenu').classList.toggle('open');
 };
 
-const btnClose = () => {
-    banner.style.marginTop = "-420px"
-};
+
 
 link1.onclick = () => {
     document.getElementsByClassName('item1')[0].setAttribute('style', 'z-index: 2');
@@ -10711,9 +10696,7 @@ module.exports = __webpack_require__(/*! ./src/js/main.js */"./src/js/main.js");
 
 /******/ });
 //# sourceMappingURL=bundle.js.map
-
 // kakaologin
-
 
 // checkLogOut.onclick = ()=> {
 //   if(!Kakao.Auth.getAccessToken()) {
@@ -10724,10 +10707,23 @@ module.exports = __webpack_require__(/*! ./src/js/main.js */"./src/js/main.js");
 //     alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
 //   })
 // };
+Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
 
+if(Kakao.Auth.getAccessToken()){
+  Kakao.API.request({
+  url:'/v2/user/me',
+  success: res => {
+    loginInfo = JSON.parse(JSON.stringify(res))
+    console.log(loginInfo);
+    checkLogin.innerHTML= loginInfo.properties.nickname;
+    kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+  }
+  ,fail: err => {
+    console.log(JSON.stringify(err))
+  }
+})}
 
 let loginInfo ={}
-Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
 function loginFormWithKakao() {
   if(Kakao.Auth.getAccessToken()) {
     console.log("이미 로그인댐");
@@ -10741,8 +10737,8 @@ function loginFormWithKakao() {
         success: res => {
           loginInfo = JSON.parse(JSON.stringify(res))
           console.log(loginInfo);
-          checkLogin.innerHTML= loginInfo.properties.nickname;
-          kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+          // checkLogin.innerHTML= loginInfo.properties.nickname;
+          // kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
         }
         ,fail: err => {
           console.log(JSON.stringify(err))
@@ -10754,3 +10750,8 @@ function loginFormWithKakao() {
     },
   })
 }
+const banner = document.querySelector('.banner')
+
+const btnClose = () => {
+    banner.style.marginTop = "-420px"
+};
