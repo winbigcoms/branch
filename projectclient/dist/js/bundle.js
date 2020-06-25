@@ -10260,6 +10260,7 @@ try {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _personal_beak__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../personal/beak */ "./src/personal/beak.js");
+/* harmony import */ var _personal_beak__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_personal_beak__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _personal_mi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../personal/mi */ "./src/personal/mi.js");
 /* harmony import */ var _personal_mi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_personal_mi__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _personal_yong__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../personal/yong */ "./src/personal/yong.js");
@@ -10291,24 +10292,127 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************!*\
   !*** ./src/personal/beak.js ***!
   \******************************/
-/*! exports provided: pi, power */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pi", function() { return pi; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "power", function() { return power; });
-// src/js/lib.js
-// ES6 모듈
-const pi = Math.PI;
+const mainUl = document.querySelector(".main-wirte-pick-lists");
+const mainSlidePrevBtn = document.querySelector(".main-slide-priv");
+const mainSlideNextBtn = document.querySelector(".main-slide-next");
+const mainSlideNumber = document.querySelector(".main-silde-numbering");
+const mainNotice = document.querySelector('.main-notice');
 
-function power(x, y) {
-  // ES7: 지수 연산자
-  return x ** y;
+let notice = [
+  {type:"Notice",content:"삼성 갤럭시 S20에 작가님의 브런치북이 소개됩니다!"},
+  {type:"Update",content:"[오픈] 당신이 읽던 작품, '글 읽는 서재'에 모아두었어요"},
+  {type:"Notice",content:"(6/3) 서비스 이용약관 및 개인정보 처리방침 변경 안내"},
+  {type:"Update",content:"메이플 스토리 신규 5차 스킬이 추가됩니다!"},
+]
+
+const checkNowSlidePage = pageNum => {
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    li.classList.toggle("main-nowPage",idx === pageNum);
+  })
 }
 
-// ES6 클래스
+const mainSlideBtnFunction = (function(){
+  let slideNum = 0;
+  const countSlide = (clickBtnNum)=> {
+    if(typeof clickBtnNum === "number"){
+      slideNum = clickBtnNum
+    }
+    mainSlidePrevBtn.classList.toggle("no-show",slideNum === 0);
+    mainSlideNextBtn.classList.toggle("no-show",slideNum === 8);
+    mainUl.style.transform = `translateX(-${slideNum*960}px)`;
+    checkNowSlidePage(slideNum);
+  }
+  const clickMainSlideNext = clickBtnNum => {
+    ++slideNum;
+    countSlide(clickBtnNum)
+  };
+  const clickMainSlidePrev = clickBtnNum => {
+    --slideNum;
+    countSlide(clickBtnNum)
+  }
+  return {
+    clickMainSlideNext,
+    clickMainSlidePrev
+  }
+})();
 
+mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
+mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;
+
+mainSlideNumber.onclick = e =>{
+  if( !e.target.matches(".main-silde-numbering > li > a") ) return;
+  [...mainSlideNumber.children].forEach( (li, idx) => {
+    if(li === e.target.parentNode){
+      mainSlideBtnFunction.clickMainSlidePrev(idx);
+    }
+  })
+};
+const makeMainSlide = async() => {
+  let {data} = await axios.get("http://localhost:9000/post");
+  console.log(data[0]);
+  let html ="";
+  let count = 1;
+  let count2 = 1;
+  data[0].forEach(data => {
+    // 10번의 사이클을 3번 돈다.
+    if(count===1 || count===4 || count=== 7){
+      html += `<li class="main-slide${count2}">
+                  <div class="main-slide slide${count2}-1">
+                    <a href="javascript:void(0)">
+                      <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                      <div class="main-slide-info">
+                        <h4>${data.title}</h4>
+                        <p>${data.content}</p>
+                        <p>by ${data.name}</p>
+                      </div>
+                    </a>
+                  </div>`;
+      ++count;
+      return;
+    }else if(count === 3 ||count === 6 ||count === 10 ) {
+      html += `<div class="main-slide slide${count2}-3">
+                <a href="javascript:void(0)">
+                  <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                  <div class="main-slide-info">
+                    <h4>${data.title}</h4>
+                    <p>${data.content}</p>
+                    <p>by ${data.name}</p>
+                  </div>
+                </a>
+              </div>
+              </li>`;  
+      count === 10 ? count = 1: ++count ;
+      count2 < 3? ++count2 : count2 = 1;
+      return;
+    }
+    html += `<div class="main-slide slide${count2}-2">
+              <a href="javascript:void(0)">
+                <img class="main-slide-img"src="../style/images/subslide/${data.source}" alt="">
+                <div class="main-slide-info">
+                  <h4>${data.title}</h4>
+                  <p>${data.content}</p>
+                  <p>by ${data.name}</p>
+                </div>
+              </a>
+            </div>`;
+    ++count;
+  })
+  mainUl.innerHTML = html;
+}
+window.onload = makeMainSlide;
+
+let intervalTime = (notice.length+1)*7000
+setInterval(() => {
+  notice.forEach( item => {
+    setTimeout(()=> {
+      mainNotice.innerHTML = `<h4>${item.type}</h4>
+      <p>${item.content}</p>`
+    },7000)
+  })
+}, intervalTime);
 
 /***/ }),
 
@@ -10319,7 +10423,123 @@ function power(x, y) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+// Status
+const keyword = ['지구한바퀴</br>세계여행', '그림·웹툰', '시사·이슈', 'IT</br>트렌드', '사진·촬영', '취향저격</br>영화 리뷰', '오늘은</br>이런 책', '뮤직 인사이드', '글쓰기</br>코치', '직장인</br>현실 조언', '스타트업</br>경험담', '육아</br>이야기', '요리·레시피', '건강·운동', '멘탈 관리</br>심리 탐구', '디자인</br>스토리', '문화·예술', '건축·설계', '인문학·철학', '쉽게 읽는</br>역사', '우리집</br>반려동물', '멋진</br>캘리그래피', '사랑·이별', '감성</br>에세이'];
+let selectedCategory = [];
 
+// Dom
+const $writersList = document.querySelector('.writers-list');
+const $keywordList = document.querySelector('.keyword-list');
+const $writersCategoryList = document.querySelector('.writers-favorite-list');
+const $writersCategoryButtons = document.querySelectorAll('.writers-favorite-list > button');
+
+// select-random-category
+function selectRandomCategory() {
+    let favorite = ['사진', '역사', '브랜딩', '책', '경제', '스타트업'];
+    for (let i = 0; i < 3; i++) {
+        const random = Math.floor((Math.random() * favorite.length));
+        selectedCategory.push(favorite[random]);
+        favorite = favorite.filter(favorite => favorite !== selectedCategory[i]);
+    }
+    return selectedCategory;
+}
+
+// insert category value to button
+function insertCategoryValue() {
+    selectRandomCategory().forEach((category, i) => {
+        $writersCategoryButtons[i].textContent = category;
+        $writersCategoryButtons[i].name = category;
+        $writersCategoryButtons[i].value = category;
+    });
+}
+
+// find active category
+function findActiveCategory() {
+   const category = [...$writersCategoryButtons].find(button => button.classList.contains('active'));
+   return category.value;
+}
+
+// click category & add active class 
+$writersCategoryList.onclick = ({target}) => {
+    if (!target.matches('.writers-favorite-list > button')) return;
+    [...$writersCategoryButtons].forEach(item => item.classList.toggle('active' ,item === target));
+    render(findActiveCategory(), keyword);
+};
+
+
+
+// render
+const render = async (category, keyword) => {
+
+    // keyword-list
+    let keywordItem = '';
+    keyword.forEach(item => {
+        keywordItem += `<li class="keyword-item"><a href="#"><span class="keyword-title">${item}</span></a></li>`;
+    });
+    $keywordList.innerHTML = keywordItem;
+
+    // writers-list
+    let html = '';
+    let perfectUserInfo = [];
+    try {
+        let response = await axios.get(`http://localhost:9000/user/:${category}`);
+        let userInfo = response.data[0];
+        let userCount = 1
+        userInfo.reduce((acc, cur, idx) => {
+            if (idx === 0) {
+                return acc = cur;
+            }
+            if (idx === userInfo.length - 1) {
+                ++userCount;
+                acc["CategoryName" + userCount] = cur.CategoryName;
+                perfectUserInfo.push(acc);
+                return acc
+            }
+            if (acc.name === cur.name) {
+                ++userCount;
+                acc["CategoryName" + userCount] = cur.CategoryName;
+                return acc
+            }
+            if (acc.name !== cur.name) {
+                userCount = 1;
+                perfectUserInfo.push(acc);
+                acc = cur;
+                return acc
+            }
+        }, {});
+    } catch (err) {
+        console.error(err);
+    }
+    
+    let selectedUserInfo = perfectUserInfo.filter(person => person.CategoryName === category);
+    let temp = perfectUserInfo.filter(person => person.CategoryName2 === category);
+    if (selectedUserInfo.length < 6) {
+      selectedUserInfo = [...selectedUserInfo, ...temp];
+    }
+    selectedUserInfo.length = 6;
+    selectedUserInfo.forEach(person => {
+        html += `<li><a href="#" class="writer-link-wrap">
+      <img class="writer-img" src="../style/images/profile/${person.img}">
+      <strong class="writer-name">${person.name}</strong>
+      <p class="writer-job">${person.job}</p> 
+      <p class="writer-profile">${person.profile}</p></a>
+      <a href="#" class="writer-favorite">${person.CategoryName}</a>
+      <a href="#" class="writer-favorite">${person.CategoryName2}</a>
+      <a href="#" class="writer-favorite-more">· · ·</a>
+    </li>`;
+    });
+    $writersList.innerHTML = html;
+
+
+};
+
+window.addEventListener('load', function () {
+    insertCategoryValue();
+});
+
+window.addEventListener('load',function() {
+    render(findActiveCategory(), keyword);
+});
 
 /***/ }),
 

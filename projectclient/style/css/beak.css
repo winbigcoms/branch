@@ -78,7 +78,7 @@ main{
   background-image:url("../images/logo/ico_brunch_v8_181004_v2.png");
   background-position: -120px -200px;
   width: 28px;
-  height: 28px;;
+  height: 28px;
   margin: 0px 10px 10px 5px;
 }
 .main-notice {
@@ -99,6 +99,7 @@ main{
 .main-recommend-write {
   overflow: hidden;
   position: relative;
+  color: #fff;
 }
 .main-write-pick-list-box{
   margin: 0 auto;
@@ -124,19 +125,53 @@ main{
   justify-content: center;
 }
 .main-slide a{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.main-slide-img{
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+.main-slide a:hover img{
+  transform: scale(1.1,1.1);
+}
+.main-slide-info{
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  transition: all 0.3s ease-in-out;
+}
+.main-slide-info > *{
+  width: 80%;
+}
+.main-slide a:hover div{
+  background-color: rgba(0,0,0,0.7);
 }
 .main-slide h4, .main-slide p {
   margin: 20px auto;
   color: #ddd;
+  line-height: 20px;
+  text-align: center;
+  word-break: keep-all;
+}
+.main-slide p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main-slide h4 {
   font-size: 28px;
   font-weight: 400;
+  line-height: 36px;
 }
 .slide1-1 {
   width: 480px;
@@ -200,16 +235,18 @@ main{
   margin: 30px auto 0 ;
   display: flex;
   justify-content: center;
+  color: #333
 }
 .main-silde-numbering > li{
   padding: 0 11px;
-  font-size: 12px;
+  font-size: 16px;
   opacity: 0.3;
   transition: all 0.4s; 
+  font-weight: bold;
 }
 .main-nowPage{
   opacity: 1 !important;
   text-decoration-line: underline;
-  font-weight: bold;
-  line-height: 1px;
+  font-weight: 900;
+  font-size: 20px;
 }
