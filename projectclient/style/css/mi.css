@@ -103,16 +103,20 @@ a {
 }
 
 .list-article {
+  width: 7800px;
+  transform: translateX(0);
   display: flex;
   justify-content: space-between;
   vertical-align: top;
+  transition: all 0.3s;
 }
 
 .list-article li {
   transform: translateX(290px);
   display: inline-block;
   width: 240px;
-  margin: 0 1em 0 0;
+  margin: 0 10px;
+
 }
 
 .list-article img {
@@ -329,4 +333,10 @@ a {
   height: 22px;
   background-position: -290px -100px;
   cursor: pointer;
+}
+.recommended-articles-btn-box {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
 }

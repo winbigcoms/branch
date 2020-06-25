@@ -30,10 +30,23 @@ window.onload = getArticles;
 
 let num = 0
 $nextBtn.onclick = () => {
-  num++
-  let axisX = 960;
-  $carouselWindow.style.left = `-${axisX*num}px`;
-  console.log([$carouselWindow.style.left]);
+  num++;
+  if(num === 1) {
+    $prevBtn.classList.toggle("hidden");
+  }
+  $carouselUl.style.transform = `translateX(-${num*960}px)`;
+  if (num === 7) {
+    $nextBtn.classList.toggle("hidden")
+  }
 };
 
-  
+$prevBtn.onclick = () => {
+  num--;
+  if (num === 6) {
+    $nextBtn.classList.toggle("hidden")
+  }
+  $carouselUl.style.transform = `translateX(-${num*960}px)`;
+  if (num === 0) {
+    $prevBtn.classList.toggle("hidden")
+  }
+}
