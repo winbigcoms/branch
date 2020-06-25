@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brunch</title>
+    <link rel="stylesheet" href="style.css" />
+    <script script type="text/javascript" src="app.js" defer></script>
+
+
+</head>
+
+
+<body>
+    <div class="banner" 50 style="margin-top: 0px;">
+        <h2 class="screen-out">배너</h2>
+        <ul class="list-banner">
+            <li class="item-banner" style="z-index: 1;">
+                <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-l" target="_blank"
+                    style="background-image: url(//t1.daumcdn.net/section/oc/7fe9dff530ab4605a6723063a7dd8569)">
+                    <img class="txt-banner" src="./image/mainlink1.png">
+                </a>
+                <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-s" target="_blank"
+                    style="background-image: url(&quot;//t1.daumcdn.net/section/oc/55cb0adc89e34250b5fda064970d4a5f&quot;);opacity: 1;">
+                    <img class="txt-banner" src="./image/txt_mainlink1.png">
+                </a>
+            </li>
+            <li class="item-banner" style="z-index: 2;">
+                <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-l" target="_blank"
+                    style="background-image:url(//t1.daumcdn.net/section/oc/52eb5eca7bc7491e915354e612016802)">
+                    <img class="txt-banner" src="./image/mainlink2.png">
+                </a>
+                <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-s" target="_blank"
+                    style="background-image: url(&quot;//t1.daumcdn.net/section/oc/d7413d003cc14683892934eee6f66a02&quot;); opacity: 1;">
+                    <img class="txt-banner" src="./image/txt_mainlink2.png">
+                </a>
+            </li>
+        </ul>
+        <div class="paging paging-type1">
+            <div class="inner-paging">
+                <a href="" class="link-page">
+                    <span class="ico-brunch">01</span></a>
+                <span class="link-page"><span class="screen-out">현재페이지</span>
+                    <span class="ico-brunch">02</span></span>
+            </div>
+        </div>
+
+        <button class="ico-brunch btn-close" onclick="btnClose()">닫기</button>
+    </div>
+
+    <div id="wrap" class="wrap-brunch">
+        <header id="head">
+            <div id="wrap" class="wrap-brunch">
+                <header id="head">
+                    <div class="service-header top">
+                        <div class="wrap-inner">
+                            <div class="f-l">
+                                <button id="btn-servicemenu" type="button"
+                                    class="f-l text-hide btn-menu img-ico #sidebar" onclick="togglesidebar()">
+                                    메뉴
+                                </button>
+
+                                <h1 class="f-l">
+                                    <a href="" class="logo-service text-hide" title="brunch">brunch</a>
+                                </h1>
+                            </div>
+
+                            <div class="f-r">
+                                <div class="wrap-btn-search">
+                                    <button id="btn-servicemenu-search" type="button"
+                                        class="f-r img-ico text-hide btn-search #search_btn">
+                                        검색
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="f-r">
+                                <a href="" class="f-r btn-request btn-default">시작하기</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sidemenu" class="">
+                        <main>
+                            <button type="button" id="btn-close-sidemenu"
+                                class="btn-close-side-menu img-side-menu ico-close f-r text-hide">
+                                닫기
+                            </button>
+                            <div class="side-profile logout">
+                                <div class="logo-service"></div>
+                                <p class="slogan">You can make anything<br />by writing</p>
+                                <p class="slogan-writer">- C.S.Lewis -</p>
+                                <a id="brunchSigninButton" href="" class="#side_request btn_apply_author"><button
+                                        class="btn-request">브런치 시작하기</button></a>
+                            </div>
+                            <div class="side-service-menu" style="height: 353px;">
+                                <ul>
+                                    <li class="now-page">
+                                        <a class="menu-word4 #side_brunch" href=""><span class="bar-left"></span>브런치
+                                            홈<span class="bar-right"></span></a>
+                                    </li>
+                                    <li>
+                                        <a class="menu-word5 #side_now brunchNowLink" href="""
+                        ><span class=" bar-left"></span>브런치 나우<span class="bar-right"></span></a>
+                                    </li>
+                                    <li>
+                                        <a class="menu-word5 #side_publish brunchPublishLink" href=""><span
+                                                class="bar-left"></span>브런치
+                                            책방<span class="bar-right"></span></a>
+                                    </li>
+                                </ul>
+
+                                <div class="side-setting find-user" style="position: inherit;">
+                                    <div class="menu-sidebanner" style="padding-bottom: 40px;">
+                                        <a class="#side_project" href=""><img style="width: 168px;"
+                                                src="./image/supportproject.png" alt="리스트 바로가기" /></a>
+                                    </div>
+                                    <a href="" class="user">계정을 잊어버리셨나요?</a>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </header>
+
+                <hr class="hide" />
+            </div>
+        </header>
+    </div>
+
+</body>
+
+</html>
