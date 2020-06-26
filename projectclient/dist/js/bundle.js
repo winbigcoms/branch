@@ -10300,7 +10300,6 @@ const mainSlidePrevBtn = document.querySelector(".main-slide-priv");
 const mainSlideNextBtn = document.querySelector(".main-slide-next");
 const mainSlideNumber = document.querySelector(".main-silde-numbering");
 const mainNotice = document.querySelector('.main-notice');
-
 let notice = [
   {type:"Notice",content:"삼성 갤럭시 S20에 작가님의 브런치북이 소개됩니다!"},
   {type:"Update",content:"[오픈] 당신이 읽던 작품, '글 읽는 서재'에 모아두었어요"},
@@ -10338,7 +10337,14 @@ const mainSlideBtnFunction = (function(){
     clickMainSlidePrev
   }
 })();
-
+mainSlideNumber.onclick = e => {
+  if( !e.target.matches(".main-silde-numbering li a")) return;
+  [...mainSlideNumber.children].forEach((li,idx) => {
+    if(li === e.target.parentNode){
+      mainSlideBtnFunction.clickMainSlideNext(idx)
+    }
+  })
+}
 mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
 mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;
 
@@ -10415,9 +10421,7 @@ const makeMainSlide = async() => {
           console.log(JSON.stringify(err))
         }
       })
-      // checkLogin.innerHTML= loginInfo.properties.nickname;
-      // kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
-    }
+          }
     ,fail: err => {
       console.log(JSON.stringify(err))
     }
@@ -10436,47 +10440,7 @@ setInterval(() => {
   })
 }, intervalTime);
 
-// kakaologin
 
-// checkLogOut.onclick = ()=> {
-//   if(!Kakao.Auth.getAccessToken()) {
-//     console("로그인 안대어 있어요");
-//     return;
-//   }
-//   Kakao.Auth.logout(function() {
-//     alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-//   })
-// };
-
-
-// let loginInfo ={}
-// Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
-// function loginFormWithKakao() {
-//   if(Kakao.Auth.getAccessToken()) {
-//     console.log("이미 로그인댐");
-//     console.log(Kakao.Auth.getAccessToken());
-//     return;
-//   }
-//   Kakao.Auth.loginForm({
-//     success: function(authObj) {
-//       Kakao.API.request({
-//         url:'/v2/user/me',
-//         success: res => {
-//           loginInfo = JSON.parse(JSON.stringify(res))
-//           console.log(loginInfo);
-//           checkLogin.innerHTML= loginInfo.properties.nickname;
-//           kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
-//         }
-//         ,fail: err => {
-//           console.log(JSON.stringify(err))
-//         }
-//       })
-//     },
-//     fail: function(err) {
-//       alert(JSON.stringify(err))
-//     },
-//   })
-// }
 
 /***/ }),
 
@@ -10649,7 +10613,7 @@ const getArticles = async () => {
   });
   $carouselUl.innerHTML = html;
 };
-window.onload = getArticles;
+window.addEventListener("load",getArticles);
 
 
 let num = 0
