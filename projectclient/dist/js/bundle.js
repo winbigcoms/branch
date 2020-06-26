@@ -10646,12 +10646,16 @@ $prevBtn.onclick = () => {
 const openSidebar = document.querySelector(".btn-menu.img-ico");
 const link1 = document.querySelector('.link-page.link-page1');
 const link2 = document.querySelector('.link-page.link-page2');
-
+const body = document.querySelector("body");
+const sidemenu = document.getElementById("sidemenu");
 
 openSidebar.onclick = togglesidebar = () => {
-    document.getElementById('sidemenu').classList.toggle('open');
-};
-
+    sidemenu.classList.toggle('open');
+  };
+body.addEventListener("click",e => {
+  if((!sidemenu.classList.contains("open")) || e.target.matches("#sidemenu *")||e.target.matches("#sidemenu")) return;
+  sidemenu.classList.toggle('open');
+}, true);
 
 
 link1.onclick = () => {
@@ -10727,15 +10731,6 @@ module.exports = __webpack_require__(/*! ./src/js/main.js */"./src/js/main.js");
 //# sourceMappingURL=bundle.js.map
 // kakaologin
 
-// checkLogOut.onclick = ()=> {
-//   if(!Kakao.Auth.getAccessToken()) {
-//     console("로그인 안대어 있어요");
-//     return;
-//   }
-//   Kakao.Auth.logout(function() {
-//     alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-//   })
-// };
 Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
 
 const sideInfo = document.querySelector(".side-profile");
