@@ -45,14 +45,6 @@ const mainSlideBtnFunction = (function(){
 mainSlidePrevBtn.onclick = mainSlideBtnFunction.clickMainSlidePrev;
 mainSlideNextBtn.onclick = mainSlideBtnFunction.clickMainSlideNext;
 
-mainSlideNumber.onclick = e =>{
-  if( !e.target.matches(".main-silde-numbering > li > a") ) return;
-  [...mainSlideNumber.children].forEach( (li, idx) => {
-    if(li === e.target.parentNode){
-      mainSlideBtnFunction.clickMainSlidePrev(idx);
-    }
-  })
-};
 const makeMainSlide = async() => {
   let {data} = await axios.get("http://localhost:9000/post");
   console.log(data[0]);
@@ -104,20 +96,38 @@ const makeMainSlide = async() => {
     ++count;
   })
   mainUl.innerHTML = html;
+  
   if(Kakao.Auth.getAccessToken()){
     Kakao.API.request({
     url:'/v2/user/me',
     success: res => {
       loginInfo = JSON.parse(JSON.stringify(res))
       console.log(loginInfo);
-      checkLogin.innerHTML= loginInfo.properties.nickname;
-      kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+      Kakao.API.request({
+        url:'/v2/user/me',
+        success: res => {
+          loginInfo = JSON.parse(JSON.stringify(res));
+          sideInfo.innerHTML = `<img class="kakao-profile-Img" src=${loginInfo.properties.thumbnail_image}></img>
+          <p class="slogan">${loginInfo.kakao_account.email}</p>
+          <p class="slogan-writer">${loginInfo.properties.nickname}</p>
+          <a id="brunchSigninButton" href="javascript:logoutFormWithKakao()" 
+          class="#side_request btn_apply_author"><button
+                  class="btn-request">로그아웃하기</button></a>`;
+          loginstateBtn.innerHTML = `<a href="javascript:logoutFormWithKakao()" class="f-r btn-request btn-default">로그아웃</a>`
+        }
+        ,fail: err => {
+          console.log(JSON.stringify(err))
+        }
+      })
+      // checkLogin.innerHTML= loginInfo.properties.nickname;
+      // kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
     }
     ,fail: err => {
       console.log(JSON.stringify(err))
     }
   })}
 }
+window.addEventListener("load",makeMainSlide);
 window.onload = makeMainSlide;
 
 let intervalTime = (notice.length+1)*7000
@@ -143,31 +153,31 @@ setInterval(() => {
 // };
 
 
-let loginInfo ={}
-Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
-function loginFormWithKakao() {
-  if(Kakao.Auth.getAccessToken()) {
-    console.log("이미 로그인댐");
-    console.log(Kakao.Auth.getAccessToken());
-    return;
-  }
-  Kakao.Auth.loginForm({
-    success: function(authObj) {
-      Kakao.API.request({
-        url:'/v2/user/me',
-        success: res => {
-          loginInfo = JSON.parse(JSON.stringify(res))
-          console.log(loginInfo);
-          checkLogin.innerHTML= loginInfo.properties.nickname;
-          kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
-        }
-        ,fail: err => {
-          console.log(JSON.stringify(err))
-        }
-      })
-    },
-    fail: function(err) {
-      alert(JSON.stringify(err))
-    },
-  })
-}
+// let loginInfo ={}
+// Kakao.init('1a86de1b6c01f3317b9730ffd02df7f2');
+// function loginFormWithKakao() {
+//   if(Kakao.Auth.getAccessToken()) {
+//     console.log("이미 로그인댐");
+//     console.log(Kakao.Auth.getAccessToken());
+//     return;
+//   }
+//   Kakao.Auth.loginForm({
+//     success: function(authObj) {
+//       Kakao.API.request({
+//         url:'/v2/user/me',
+//         success: res => {
+//           loginInfo = JSON.parse(JSON.stringify(res))
+//           console.log(loginInfo);
+//           checkLogin.innerHTML= loginInfo.properties.nickname;
+//           kakaoImg.innerHTML = `<img src="${loginInfo.properties.thumbnail_image}"/>`
+//         }
+//         ,fail: err => {
+//           console.log(JSON.stringify(err))
+//         }
+//       })
+//     },
+//     fail: function(err) {
+//       alert(JSON.stringify(err))
+//     },
+//   })
+// }

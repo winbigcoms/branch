@@ -14,34 +14,38 @@
   <div class="banner">
     <h2 class="screen-out">배너</h2>
     <ul class="list-banner">
-        <li class="item-banner item1" style="z-index: 2;">
-            <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-l" target="_blank"
-                style="background-image: url(//t1.daumcdn.net/section/oc/7fe9dff530ab4605a6723063a7dd8569)">
-                <img class="txt-banner" src="../style/images//banner/mainlink1.png">
+        <li class="item-banner" id="item1" style="z-index: 2;">
+            <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-l" target="_blank" style="
+          background-image: url(//t1.daumcdn.net/section/oc/7fe9dff530ab4605a6723063a7dd8569) ">
+                <img class="txt-banner" src="../style/images//banner/mainlink1.png" />
             </a>
-            <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-s small-div" target="_blank"
-                style="background-image: url(&quot;//t1.daumcdn.net/section/oc/55cb0adc89e34250b5fda064970d4a5f&quot;);opacity: 1;">
-                <img class="txt-banner" src="../style/images//banner/txt_mainlink1.png">
+            <a href="https://brunch.co.kr/@brunch/220" class="link-banner link-bnr-s" id="s1" target="_blank" style="
+          background-image: url('//t1.daumcdn.net/section/oc/55cb0adc89e34250b5fda064970d4a5f')">
+                <img class="txt-banner" src="../style/images//banner/txt_mainlink1.png" />
             </a>
         </li>
-        <li class="item-banner item2" style="z-index: 1;">
-            <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-l" target="_blank"
-                style="background-image:url(//t1.daumcdn.net/section/oc/52eb5eca7bc7491e915354e612016802)">
-                <img class="txt-banner" src="../style//images/banner/mainlink2.png">
+        <li class="item-banner" id="item2" style="z-index: 1;">
+            <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-l" target="_blank" style="
+          background-image: url(//t1.daumcdn.net/section/oc/52eb5eca7bc7491e915354e612016802)">
+                <img class="txt-banner" src="../style//images/banner/mainlink2.png" />
             </a>
-            <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-s" target="_blank"
-                style="background-image: url(&quot;//t1.daumcdn.net/section/oc/d7413d003cc14683892934eee6f66a02&quot;); opacity: 1;">
-                <img class="txt-banner" src="../style/images/banner/txt_mainlink2.png">
+            <a href="https://brunch.co.kr/@brunch/180" class="link-banner link-bnr-s" id="s2" target="_blank" style="
+          background-image: url('//t1.daumcdn.net/section/oc/d7413d003cc14683892934eee6f66a02') ">
+                <img class="txt-banner" src="../style/images/banner/txt_mainlink2.png" />
             </a>
         </li>
     </ul>
     <div class="paging paging-type1">
         <div class="inner-paging">
-            <a href="" class="link-page link-page1"><span class="ico-brunch">01</span></a>
-            <class class="link-page link-page2">
-                <span class="ico-brunch">02</span></class>
+            <span class="link-page link-page1">
+                <span class="ico-brunch">01</span>
+            </span>
+            <span class="link-page link-page2">
+                <span class="ico-brunch">02</span>
+            </span>
         </div>
     </div>
+
     <button class="ico-brunch btn-close" onclick="btnClose()">닫기</button>
 </div>
 
@@ -70,12 +74,11 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="f-r" id="loginState">
+                        <div class="f-r" id="loginState" >
                             <a href="javascript:loginFormWithKakao()" class="f-r btn-request btn-default">시작하기</a>
                         </div>
                     </div>
                 </div>
-
 
                 <div id="sidemenu" class="">
                     <div class="overlay"></div>
@@ -100,12 +103,11 @@
                                 </li>
                                 <li>
                                     <a class="menu-word5 #side_now brunchNowLink" href="">
-                                        <span class=" bar-left"></span>브런치 나우<span class="bar-right"></span></a>
+                                        <span class="bar-left"></span>브런치 나우<span class="bar-right"></span></a>
                                 </li>
                                 <li>
                                     <a class="menu-word5 #side_publish brunchPublishLink" href=""><span
-                                            class="bar-left"></span>브런치
-                                        책방<span class="bar-right"></span></a>
+                                            class="bar-left"></span>브런치 책방<span class="bar-right"></span></a>
                                 </li>
                             </ul>
 
@@ -326,7 +328,7 @@
       </button>
     </div>
   </div>  
-  <button class="go-to-top a11y-hidden">페이지 맨 위로 돌아가기</button>
+  <button class="top-btn go-to-top icon-top-btn"><span class="a11y-hidden">페이지 맨 위로 돌아가기</span></button>
 </section>
 <footer class="foot-brunch">
   <div class="first-foot">

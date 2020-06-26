@@ -1,5 +1,6 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css);
 @import url(https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap);
+
 /* reset layout */
 html {
  font-size: 10px;
@@ -250,6 +251,7 @@ main{
   font-weight: 900;
   font-size: 20px;
 }
+/* brunch text img */
 .brunch-title {
   background: url(./9743a9e33cc96c9074bb0a5b2fcebe41.png) no-repeat;
   background-size: 380px 600px;
@@ -495,7 +497,7 @@ main{
 }
 
 .list-article li {
-  transform: translateX(290px);
+  transform: translateX(270px);
   display: inline-block;
   width: 240px;
   margin: 0 10px;
@@ -537,7 +539,6 @@ main{
   padding: 22px 0 0 0;
   font-size: 1.2rem;
   text-overflow: ellipsis;
-  /* text-indent: -999px; */
 }
 
 .icon-by {
@@ -566,7 +567,7 @@ main{
   cursor: pointer;
 }
 .next-btn {
-  background-position:  -269px -175px;
+  background-position: -269px -175px;
   width: 100px;
   height: 100px;
   overflow: hidden;
@@ -584,13 +585,31 @@ main{
 }
 
 .go-to-top {
-  display: block;
-  position: fixed;
-  bottom: 10px;
+  position: relative;
+  bottom: 30px;
   right: 40px;
   width: 60px;
   height: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
   background: url(./59011b7bdfe914d3552c09314245c152.png) no-repeat 0 -90px;
+}
+
+@keyframes showup {
+  0% {
+    bottom: 0px;
+  }
+  50% {
+    bottom: 15px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+.icon-top-btn {
+  background-position: 0 -90px;
 }
 
 /* Footer 영역 */
@@ -728,7 +747,7 @@ main{
   margin: 0;
   padding: 0;
 }
-button {
+.banner button,.wrap-brunch button {
   border: 0 none;
   background-color: transparent;
   cursor: pointer;
@@ -791,7 +810,7 @@ button {
 .banner {
   overflow: hidden;
   position: relative;
-  margin-top: 0px;
+  margin-top: -420px;
 }
 
 .banner .list-banner {
@@ -831,6 +850,15 @@ button {
   background-repeat: no-repeat;
 }
 
+.banner .link-banner {
+  width: 100%;
+  display: block;
+  text-align: center;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
 .banner .item-banner.hide {
   transform: translateY(-60px);
 }
@@ -858,6 +886,7 @@ button {
   position: absolute;
   bottom: 0;
   height: 60px;
+  opacity: 1;
 }
 
 .banner .link-bnr-s .txt-banner {
@@ -1079,7 +1108,8 @@ button {
 }
 
 #sidemenu .side-service-menu li.hr {
-  background: url(//t1.daumcdn.net/brunch/static/img/help/pc/ico_sidebar.png) center no-repeat;
+  background: url(//t1.daumcdn.net/brunch/static/img/help/pc/ico_sidebar.png)
+    center no-repeat;
   height: 15px;
   margin: 30px auto 32px;
   padding: 0;
@@ -1126,11 +1156,7 @@ button {
   margin: 40px auto 9px;
   background-position: -1px -26px;
 }
-.kakao-profile-Img {
-  width: 90px;
-  border-radius: 15px;
-  margin-top: 20px;
-}
+
 #sidemenu .side-profile.logout .slogan {
   font-family: Georgia;
   font-size: 13px;
@@ -1192,7 +1218,9 @@ button {
   margin: 7px 0 0 7px;
   background-position: -60px 0;
 }
-
+.logined.btn-request {
+  margin-top: 0 !important;
+}
 .service-header {
   position: static;
   /* float: left; */
@@ -1201,7 +1229,7 @@ button {
 
 .service-header h1 .logo-service {
   display: block;
-  background: url(./ca32ec672360e6bb7b80b6b9850fe787.png) no-repeat;
+  background: url(/ca32ec672360e6bb7b80b6b9850fe787.png) no-repeat;
   width: 72px;
   height: 22px;
   margin-top: -1px;
@@ -1269,6 +1297,9 @@ button {
 
 .active {
   left: 0px !important;
+}
+.kakao-profile-Img {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=style.css.map*/
