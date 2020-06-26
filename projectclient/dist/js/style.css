@@ -797,12 +797,14 @@ main{
   vertical-align: top;
 }
 
-#head {
-  height: 60px;
-}
 
 .wrap-brunch {
   overflow: hidden;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: #fff;
 }
 
 /* banner */
@@ -887,6 +889,7 @@ main{
   bottom: 0;
   height: 60px;
   opacity: 1;
+  transition: all 1s;
 }
 
 .banner .link-bnr-s .txt-banner {

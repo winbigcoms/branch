@@ -10408,7 +10408,7 @@ const makeMainSlide = async() => {
           <p class="slogan-writer">${loginInfo.properties.nickname}</p>
           <a id="brunchSigninButton" href="javascript:logoutFormWithKakao()" 
           class="#side_request btn_apply_author"><button
-                  class="btn-request">로그아웃하기</button></a>`;
+                  class="logined btn-request">로그아웃하기</button></a>`;
           loginstateBtn.innerHTML = `<a href="javascript:logoutFormWithKakao()" class="f-r btn-request btn-default">로그아웃</a>`
         }
         ,fail: err => {
@@ -10713,22 +10713,16 @@ openSidebar.onclick = (e) => {
     sbnr1.style.opacity = "1";
     sbnr2.style.opacity = "1";
     e.stopPropagation();
-
-    const foo = ({
-        target
-    }) => {
-        if (target === $sidemenu) return;
+// 바디 클릭시 사이드 바 닫기
+    const foo = ({target}) => {
+        if (target.matches("#sidemenu *") || target.matches("#sidemenu")) return;
         document.getElementById("sidemenu").classList.remove("open");
         document.removeEventListener("click", foo);
     };
     document.addEventListener("click", foo);
 };
 
-const btnClose = () => {
-    banner.style.marginTop = "-420px";
-    sbnr1.style.opacity = "1";
-    sbnr2.style.opacity = "1";
-};
+
 
 link1.onclick = () => {
     document
@@ -10849,6 +10843,7 @@ function loginFormWithKakao() {
         url:'/v2/user/me',
         success: res => {
           loginInfo = JSON.parse(JSON.stringify(res));
+          console.log(loginInfo)
           sideInfo.innerHTML = `<img class="kakao-profile-Img" src=${loginInfo.properties.thumbnail_image}></img>
           <p class="slogan">${loginInfo.kakao_account.email}</p>
           <p class="slogan-writer">${loginInfo.properties.nickname}</p>
@@ -10875,11 +10870,13 @@ const logoutFormWithKakao = ()=> {
     <a id="brunchSigninButton" href="javascript:loginFormWithKakao()" class="#side_request btn_apply_author"><button
             class="btn-request">브런치 시작하기</button></a>`;
     loginstateBtn.innerHTML = `<a href="javascript:loginFormWithKakao()" class="f-r btn-request btn-default">시작하기</a>`
-    alert("로그아웃 되었습니다.");
   })
 }
 const banner = document.querySelector('.banner')
-
+const sbnr1 = document.getElementById("s1");
+const sbnr2 = document.getElementById("s2");
 const btnClose = () => {
-    banner.style.marginTop = "-420px"
+  banner.style.marginTop = "-420px";
+  sbnr1.style.opacity = "1";
+  sbnr2.style.opacity = "1";
 };
