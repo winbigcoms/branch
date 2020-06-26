@@ -122,7 +122,7 @@ button {
 .banner {
   overflow: hidden;
   position: relative;
-  margin-top: 0px;
+  margin-top: -420px;
 }
 
 .banner .list-banner {
@@ -162,6 +162,15 @@ button {
   background-repeat: no-repeat;
 }
 
+.banner .link-banner {
+  width: 100%;
+  display: block;
+  text-align: center;
+  height: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
 .banner .item-banner.hide {
   transform: translateY(-60px);
 }
@@ -189,6 +198,7 @@ button {
   position: absolute;
   bottom: 0;
   height: 60px;
+  opacity: 1;
 }
 
 .banner .link-bnr-s .txt-banner {
@@ -410,7 +420,8 @@ button {
 }
 
 #sidemenu .side-service-menu li.hr {
-  background: url(//t1.daumcdn.net/brunch/static/img/help/pc/ico_sidebar.png) center no-repeat;
+  background: url(//t1.daumcdn.net/brunch/static/img/help/pc/ico_sidebar.png)
+    center no-repeat;
   height: 15px;
   margin: 30px auto 32px;
   padding: 0;
