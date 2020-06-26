@@ -112,7 +112,7 @@ a {
 }
 
 .list-article li {
-  transform: translateX(290px);
+  transform: translateX(270px);
   display: inline-block;
   width: 240px;
   margin: 0 10px;
@@ -154,7 +154,6 @@ a {
   padding: 22px 0 0 0;
   font-size: 1.2rem;
   text-overflow: ellipsis;
-  /* text-indent: -999px; */
 }
 
 .icon-by {
@@ -183,7 +182,7 @@ a {
   cursor: pointer;
 }
 .next-btn {
-  background-position:  -269px -175px;
+  background-position: -269px -175px;
   width: 100px;
   height: 100px;
   overflow: hidden;
@@ -201,13 +200,31 @@ a {
 }
 
 .go-to-top {
-  display: block;
-  position: fixed;
-  bottom: 10px;
+  position: relative;
+  bottom: 30px;
   right: 40px;
   width: 60px;
   height: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
   background: url(../images/logo/view_discover_150824.png) no-repeat 0 -90px;
+}
+
+@keyframes showup {
+  0% {
+    bottom: 0px;
+  }
+  50% {
+    bottom: 15px;
+  }
+  100% {
+    bottom: 30px;
+  }
+}
+
+.icon-top-btn {
+  background-position: 0 -90px;
 }
 
 /* Footer 영역 */
@@ -224,6 +241,7 @@ a {
   position: relative;
   width: 960px;
   margin: 0 auto;
+
 }
 
 .qtn-part {
