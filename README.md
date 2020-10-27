@@ -55,7 +55,7 @@ https://docs.google.com/document/d/1e7rioPlwW63NkIrDymWCCy-Qzl_GtC7LRH8lnpfNILY/
 
 ## 프로젝트 결과
 
-<iframe width="640" height="360" src="https://youtu.be/YsFSgSwvfXc" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+<iframe width="993" height="538" src="https://www.youtube.com/embed/YsFSgSwvfXc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 배운점
 
