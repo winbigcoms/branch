@@ -55,7 +55,7 @@ https://docs.google.com/document/d/1e7rioPlwW63NkIrDymWCCy-Qzl_GtC7LRH8lnpfNILY/
 
 ## 프로젝트 결과
 
-<iframe width="993" height="538" src="https://www.youtube.com/embed/YsFSgSwvfXc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![branch](https://i9.ytimg.com/vi/YsFSgSwvfXc/mq2.jpg?sqp=CIjq3vwF&rs=AOn4CLC37h8vcSoNXTPRRcae3YXOjRb6QQ)](https://youtu.be/YsFSgSwvfXc)
 
 ## 배운점
 
